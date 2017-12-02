@@ -21,7 +21,18 @@ const solution1 = input.split('\n').reduce((a, row) => {
     ([min, max], x) => [Math.min(min, x), Math.max(max, x)],
     [Number.MAX_VALUE, Number.MIN_VALUE]
   );
+
   return a + Math.abs(min - max);
 }, 0);
 
 console.log(solution1);
+
+const solution2 = input.split('\n').map(r => r.split('\t')).reduce((a, row) => {
+    const [x, y] = [].concat.apply([], 
+        row.map(i => row.filter(j => i !== j).map(x => [i, x]))
+    ).find(([a, b]) => (a/b)%1==0);
+
+    return a + (x/y);
+}, 0);
+
+console.log(solution2);
